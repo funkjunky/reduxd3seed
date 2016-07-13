@@ -4,9 +4,10 @@
   "author": "Jason McCarrell <jason.abz@gmail.com>",
   "repository": "https://github.com/funkjunky/reduxd3seed",
   "dependencies": {
-    "d3": "^4.1.1",
+    "d3": "3.*",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-faux-dom": "^2.7.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2"
   },
