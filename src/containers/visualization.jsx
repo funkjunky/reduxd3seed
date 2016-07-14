@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import d3 from 'd3';
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 import TweenableCircle from './tweenablecircle.jsx';
 
@@ -35,9 +36,11 @@ let Visualization = ({products}) => {
             <g id="graph" transform={graphTranslation}>
                 //TODO: Put in axes, as well as other containers of shapes here.
                 <g id="circles">
-                    {translatedCircles.map((attrs, index) =>
-                        <TweenableCircle {...attrs} key={index} />
-                    )}
+                    <ReactCSSTransitionGroup transitionName="example" component="g" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                        {translatedCircles.map((attrs, index) =>
+                                <TweenableCircle {...attrs} key={index} />
+                        )}
+                    </ReactCSSTransitionGroup>
                 </g>
             </g>
         </svg>
