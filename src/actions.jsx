@@ -7,3 +7,11 @@ export const addProduct = (product) => {
         product,
     };
 }
+
+export const updateProduct = (product, index) => {
+    return {
+        type: 'UPDATE_PRODUCT',
+        id: index,
+        product,
+    };
+}

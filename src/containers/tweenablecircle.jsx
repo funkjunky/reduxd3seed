@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { Motion, spring } from 'react-motion';
 
 let TweenableCircle = (posColor) => {
-    //let {x, y, color, text} = posColor;
-    let {xx, yy, color, text} = posColor;
+    let {x, y, color, text} = posColor;
     //let transformTranslation = 'translate(' + x + ', ' + y + ')';
     
     //TODO: I probably need to set a key for the Motion element
     return (
-        <Motion style={posColor}>
+        <Motion style={{x, y}}>
             {({x, y}) =>
                 <g transform={'translate(' + x + ', ' + y + ')'} className="commonFactorNode">
                     <circle fill={color} r={12} />

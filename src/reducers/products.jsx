@@ -5,6 +5,11 @@ const product = (state, action) => {
                 id: action.id,
                 product: action.product,
             };
+        case 'UPDATE_PRODUCT':
+            return {
+                ...state,
+                product: action.product,
+            };
         default:
             return state;
     }
@@ -17,6 +22,14 @@ const products = (state = [], action) => {
                 ...state,
                 product(undefined, action)
             ];
+        case 'UPDATE_PRODUCT':
+            console.log('updating product...', action);
+            return state.map(_product => {
+                if(_product.id === action.id)
+                    return product(_product, action);
+
+                return _product;
+            });
         default:
             return state;
     }
