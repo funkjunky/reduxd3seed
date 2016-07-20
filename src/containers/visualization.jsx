@@ -33,29 +33,29 @@ let Visualization = ({products}) => {
     //use the x and y translation functions to translate our values
     let translatedCircles = getCommonFactors(products).map((attr) => ({ ...attr, x: x(attr.x), y: y(attr.y)}));
 
-    const graphTranslation = "translate(" + margin.left + ', ' + margin.top + ")";
+    const graphTranslation = "translate(" + margin.left + ', ' + -margin.bottom + ")";
     return (
-        <svg width={width} height={height}>
+        <svg width={width + margin.right + margin.left} height={height + margin.top + margin.bottom}>
             <g id="graph" transform={graphTranslation}>
                 <g id="axes">
                     <g id="xAxis">
-                        <line x1="20" y1="540" x2={width} y2="540" style={{stroke:'black', strokeWidth:2}} />
+                        <line x1="0" y1={height} x2={width} y2={height} style={{stroke:'black', strokeWidth:2}} />
                         <g id="xAxisTicks">
                             {x.ticks().slice(1).map((tick) => (
-                                <g transform={'translate(' + x(tick) + ', ' + 560 + ')'} key={tick}> //TODO: figure out the 560. calculated. Same with 540s
-                                    <line x1="0" y1="-15" x2="0" y2="-25" style={{stroke:'black', strokeWidth:2}} />
-                                    <text textAnchor="middle">{tick}</text>
+                                <g transform={'translate(' + x(tick) + ', ' + height + ')'} key={tick}> //TODO: figure out the 560. calculated. Same with 540s
+                                    <line x1="0" y1="5" x2="0" y2="-5" style={{stroke:'black', strokeWidth:2}} />
+                                    <text textAnchor="middle" y="20">{tick}</text>
                                 </g>
                             ))}
                         </g>
                     </g>
                     <g id="yAxis">
-                        <line x1="20" y1="540" x2="20" y2="0" style={{stroke:'black', strokeWidth:2}} />
+                        <line x1="0" y1={height} x2="0" y2="0" style={{stroke:'black', strokeWidth:2}} />
                         <g id="yAxisTicks">
-                            {y.ticks().map((tick) => (
+                            {y.ticks().slice(1).map((tick) => (
                                 <g transform={'translate(0, ' + y(tick) + ')'} key={tick}>
-                                    <line x1="15" y1="0" x2="25" y2="0" style={{stroke:'black', strokeWidth:2}} />
-                                    <text textAnchor="middle">{tick}</text>
+                                    <line x1="-5" y1="0" x2="5" y2="0" style={{stroke:'black', strokeWidth:2}} />
+                                    <text textAnchor="middle" x="-20">{tick}</text>
                                 </g>
                             ))}
                         </g>
