@@ -5,7 +5,7 @@ import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 import TweenableCircle from './tweenablecircle.jsx';
 
-const colors = ['aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'];
+const colors = ['aqua', 'gray', 'blue', 'fuchsia', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'];
 let getCommonFactors = (products) => products.reduce((carry, product, index) => {
         const color = colors[index];
 
@@ -27,6 +27,9 @@ let Visualization = ({products}) => {
     let x = d3.scale.linear().range([0, width]).domain([0, Math.ceil(Math.sqrt(max))]);
     let y = d3.scale.linear().range([height, 0]).domain([0, Math.floor(max / 2)]);
 
+    console.log('ticks: ', x.ticks().map(x));
+    
+
     //use the x and y translation functions to translate our values
     let translatedCircles = getCommonFactors(products).map((attr) => ({ ...attr, x: x(attr.x), y: y(attr.y)}));
 
@@ -34,7 +37,30 @@ let Visualization = ({products}) => {
     return (
         <svg width={width} height={height}>
             <g id="graph" transform={graphTranslation}>
-                //TODO: Put in axes, as well as other containers of shapes here.
+                <g id="axes">
+                    <g id="xAxis">
+                        <line x1="20" y1="540" x2={width} y2="540" style={{stroke:'black', strokeWidth:2}} />
+                        <g id="xAxisTicks">
+                            {x.ticks().slice(1).map((tick) => (
+                                <g transform={'translate(' + x(tick) + ', ' + 560 + ')'} key={tick}> //TODO: figure out the 560. calculated. Same with 540s
+                                    <line x1="0" y1="-15" x2="0" y2="-25" style={{stroke:'black', strokeWidth:2}} />
+                                    <text textAnchor="middle">{tick}</text>
+                                </g>
+                            ))}
+                        </g>
+                    </g>
+                    <g id="yAxis">
+                        <line x1="20" y1="540" x2="20" y2="0" style={{stroke:'black', strokeWidth:2}} />
+                        <g id="yAxisTicks">
+                            {y.ticks().map((tick) => (
+                                <g transform={'translate(0, ' + y(tick) + ')'} key={tick}>
+                                    <line x1="15" y1="0" x2="25" y2="0" style={{stroke:'black', strokeWidth:2}} />
+                                    <text textAnchor="middle">{tick}</text>
+                                </g>
+                            ))}
+                        </g>
+                    </g>
+                </g>
                 <g id="circles">
                     <ReactCSSTransitionGroup transitionName="example" component="g" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
                         {translatedCircles.map((attrs, index) =>

@@ -8,7 +8,7 @@ let TweenableCircle = (posColor) => {
     
     //TODO: I probably need to set a key for the Motion element
     return (
-        <Motion style={{x, y}}>
+        <Motion style={{x: spring(x), y: spring(y)}}>
             {({x, y}) =>
                 <g transform={'translate(' + x + ', ' + y + ')'} className="commonFactorNode">
                     <circle fill={color} r={12} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateProduct } from '../actions.jsx';
+import productsReducer from '../reducers/products.jsx';
 
 //TODO: try without the class...
 class ProductList extends Component {
@@ -20,6 +21,12 @@ class ProductList extends Component {
             </ul>
         );
     }
+/*
+    dispatch(action) {
+        //this.props.dispatch(action);
+        this.setState({...this.state, products: productsReducer(this.state.products, action)});
+    }
+*/
 };
 
 //TODO: products => products is sooooooo dumb. There should be a freaking default!!!!
