@@ -16,3 +16,10 @@ export const updateProduct = (product, index) => {
         product,
     };
 }
+
+export function downloadProducts(filename) {
+    return dispatch => 
+        fetch('/static/products.json')
+            .then(response => response.json())
+            .then(products => products.forEach((product, index) => setTimeout(() => dispatch(addProduct(product)), 500 * index)));
+}

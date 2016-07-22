@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 var BUILD_DIR = path.resolve(__dirname, 'public');
 var APP_DIR = path.resolve(__dirname, 'src');
+var DATA_DIR = path.resolve(__dirname, 'json');
 
 module.exports = {
     devtool: '#eval-source-map',
@@ -26,6 +27,11 @@ module.exports = {
                 test: /.jsx?$/,
                 loaders: ['react-hot', 'babel'],
                 include: APP_DIR,
+            },
+            {
+                test: /\.json$/,
+                loader: 'json',
+                include: DATA_DIR,
             },
         ],
     },

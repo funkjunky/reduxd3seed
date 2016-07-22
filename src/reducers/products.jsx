@@ -23,7 +23,6 @@ const products = (state = [], action) => {
                 product(undefined, action)
             ];
         case 'UPDATE_PRODUCT':
-            console.log('updating product...', action);
             return state.map(_product => {
                 if(_product.id === action.id)
                     return product(_product, action);
