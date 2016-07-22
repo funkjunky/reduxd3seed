@@ -1,3 +1,4 @@
+//TODO: encapsulate the id incrementer
 let nextProductId = 0;
 
 export const addProduct = (product) => {
