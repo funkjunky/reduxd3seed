@@ -24,8 +24,8 @@ let Visualization = ({products}) => {
     let width = 640 - margin.left - margin.right;
     let height = 640 - margin.top - margin.bottom;
 
-    let x = d3.scale.linear().range([0, width]).domain([0, Math.ceil(Math.sqrt(max))]);
-    let y = d3.scale.linear().range([height, 0]).domain([0, Math.floor(max / 2)]);
+    let x = d3.scale.linear().range([0, width]).domain([0, Math.ceil(Math.sqrt(max)) + 1]);
+    let y = d3.scale.linear().range([height, 0]).domain([0, Math.floor(max / 1.8) + 1]); //TODO: I don't know why i can't simply do /2
 
     console.log('ticks: ', x.ticks().map(x));
     
@@ -35,7 +35,7 @@ let Visualization = ({products}) => {
 
     const graphTranslation = "translate(" + margin.left + ', ' + -margin.bottom + ")";
     return (
-        <svg width={width + margin.right + margin.left} height={height + margin.top + margin.bottom}>
+        <svg width={width} height={height}>  //TODO: this may not be necessary... if i omit it nothing changes...
             <g id="graph" transform={graphTranslation}>
                 <g id="axes">
                     <g id="xAxis">
