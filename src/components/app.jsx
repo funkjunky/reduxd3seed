@@ -6,6 +6,7 @@ import Visualization from '../containers/visualization.jsx';
 
 const App = () => (
     <div>
+        <h1>Product Factors</h1>
         <AddProduct />
         <DownloadProducts />
         <ProductList />

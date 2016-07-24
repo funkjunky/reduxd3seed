@@ -1,11 +1,13 @@
+import * as Types from '../constants/actiontypes.jsx';
+
 const product = (state, action) => {
     switch (action.type) {
-        case 'ADD_PRODUCT':
+        case Types.ADD_PRODUCT:
             return {
                 id: action.id,
                 product: action.product,
             };
-        case 'UPDATE_PRODUCT':
+        case Types.UPDATE_PRODUCT:
             return {
                 ...state,
                 product: action.product,
@@ -17,12 +19,12 @@ const product = (state, action) => {
 
 const products = (state = [], action) => {
     switch(action.type) {
-        case 'ADD_PRODUCT':
+        case Types.ADD_PRODUCT:
             return [
                 ...state,
                 product(undefined, action)
             ];
-        case 'UPDATE_PRODUCT':
+        case Types.UPDATE_PRODUCT:
             return state.map(_product => {
                 if(_product.id === action.id)
                     return product(_product, action);
