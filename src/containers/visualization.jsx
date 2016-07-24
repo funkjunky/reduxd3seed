@@ -1,21 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import d3 from 'd3';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
-import TweenableCircle from './tweenablecircle.jsx';
-
-const colors = ['aqua', 'gray', 'blue', 'fuchsia', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'];
-let getCommonFactors = (products) => products.reduce((carry, product, index) => {
-        const color = colors[index];
-
-        for(let i = 2; i <= (product.product / 2); ++i)
-            for(let y = i; y <= (product.product / 2); ++y)
-                if(i * y === +product.product)
-                    carry.push({x: i, y: y, color: color, text: product.product});
-
-        return carry;
-}, []);
+import CircleGraph from '../components/circlegraph.jsx';
+import getCommonFactors from '../helpers/getcommonfactors.jsx';
 
 let Visualization = ({products}) => {
     let max = products.reduce((carry, product) => Math.max(product.product, carry), 0);
@@ -56,11 +44,7 @@ let Visualization = ({products}) => {
                         ))}
                     </g>
                 </g>
-                <ReactCSSTransitionGroup transitionName="example" component="g" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                    {translatedCircles.map((attrs, index) =>
-                            <TweenableCircle {...attrs} key={index} />
-                    )}
-                </ReactCSSTransitionGroup>
+                <CircleGraph circles={translatedCircles} />
             </g>
         </svg>
     );
