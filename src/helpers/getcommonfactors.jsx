@@ -1,12 +1,12 @@
-import { colorsArray } from '../constants/colorsarray.jsx';
+let getCommonFactors = (product) => {
+    //TODO: use a generator or something to make this more functional 
+    let factors = [];
+    for(let x = 2; x <= (product / 2); ++x)
+        for(let y = x; y <= (product / 2); ++y)
+            if(x * y === +product)
+                factors.push({x, y});
 
-let getCommonFactors = (products) => products.reduce((carry, product, index) => {
-        for(let i = 2; i <= (product.product / 2); ++i)
-            for(let y = i; y <= (product.product / 2); ++y)
-                if(i * y === +product.product)
-                    carry.push({x: i, y: y, color: colorsArray[index], text: product.product});
-
-        return carry;
-}, []);
+    return factors;
+};
 
 export default getCommonFactors;
